@@ -7,12 +7,28 @@ find_package(glad CONFIG REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
 
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp)
-add_executable(${PROJECT_NAME} ${SRC_FILES})
+set(COMMON_SRC
+)
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+add_executable(HelloTriangle
+        src/HelloTriangle/main.cpp
+        ${COMMON_SRC}
+)
+
+add_executable(HelloSquare
+        src/HelloSquare/main.cpp
+        ${COMMON_SRC}
+)
+
+set(OPENGL_DEPS
         glfw
         glad::glad
         glm::glm
         OpenGL::GL
 )
+
+target_link_libraries(HelloTriangle PRIVATE ${OPENGL_DEPS})
+target_link_libraries(HelloSquare  PRIVATE ${OPENGL_DEPS})
+
+
+
